@@ -7,7 +7,10 @@ const AnimeList = ({ api }) => {
       {api.data.map((anime) => {
         return (
           // gap = jarak kiri kanan atas bawah // h = tinggi classname nya berapa
-          <Link href={`/${anime.mal_id}`} className="cursor-pointer">
+          <Link
+            href={`/${anime.mal_id}`}
+            className="cursor-pointer text-color-primary hover:text-color-accent transition-all"
+          >
             <Image
               src={anime.images.webp.image_url}
               alt="..."
