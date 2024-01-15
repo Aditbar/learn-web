@@ -8,14 +8,12 @@ const InputSearch = () => {
   const searchRef = useRef();
   const router = useRouter();
   const handleSearch = (event) => {
-    if (
-      (event.key === "Enter" || event.type === "click") &&
-      searchRef.current.value !== ""
-    ) {
+    const keyword = searchRef.current.value;
+    if ((event.key === "Enter" || event.type === "click") && keyword !== "") {
       // kalo ada hanling on click pake event.preventDefault();
       event.preventDefault();
       // alert(searchRef.current.value);
-      const keyword = searchRef.current.value;
+      keyword;
       router.push(`/search/${keyword}`);
     }
   };
