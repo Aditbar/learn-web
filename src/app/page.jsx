@@ -1,6 +1,10 @@
 import AnimeList from "@/components/AnimeList";
 import Header from "@/components/AnimeList/header";
-import { getAnimeResponse } from "./libs/api-libs";
+import {
+  getAnimeResponse,
+  getNestedAnimeResponse,
+  reproduce,
+} from "@/libs/api-libs";
 
 const Page = async () => {
   // const response = await fetch(
@@ -9,6 +13,12 @@ const Page = async () => {
   // const TopAnime = await response.json();
 
   const topAnime = await getAnimeResponse("/top/anime", "limit=8");
+  let recommendedAnime = await getNestedAnimeResponse(
+    "/recommendations/anime",
+    "entry"
+  );
+  // datanya ada didalam entry, map dalam map
+  recommendedAnime = reproduce(recommendedAnime, 2);
 
   return (
     <>
@@ -20,6 +30,10 @@ const Page = async () => {
           linkHref={"/populer"}
         />
         <AnimeList api={topAnime} />
+      </section>
+      <section>
+        <Header title={"Rekomendasi"} linkHref={"/populer"} />
+        <AnimeList api={recommendedAnime} />
       </section>
     </>
   );
